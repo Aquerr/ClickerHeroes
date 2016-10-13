@@ -141,11 +141,11 @@
                     <DataTemplate>
                         <Border BorderBrush="Yellow" BorderThickness="2" Background="LightYellow" MinWidth="450">
                             <WrapPanel>
-                                <Button Click="BuyHero" Cursor="Hand" Style="{StaticResource MenuButtonStyle}">
+                                <Button Click="BuyHero" Cursor="Hand">
                                     <Button.Template>
                                         <ControlTemplate>
                                             <Border BorderBrush="Gold" BorderThickness="5" CornerRadius="5 5 5 5" Background="Gold">
-                                                <Border>
+                                                <Border BorderBrush="DeepSkyBlue" BorderThickness="5" CornerRadius="5 5 5 5" Background="DeepSkyBlue">
                                                     <StackPanel>
                                                         <StackPanel>
                                                             <Label Content="LVL UP" Foreground="Gold" FontWeight="Bold"/>
