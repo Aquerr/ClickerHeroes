@@ -222,7 +222,7 @@
                             </Label.Template>
                         </Label>
 
-                        <Label>
+                        <Label Loaded="LoadHeroSouls">
                             <Label.Template>
                                 <ControlTemplate>
                                     <WrapPanel>
@@ -248,7 +248,7 @@
                             </Label.Template>
                         </Label>
 
-                        <Label>
+                        <Label Loaded="LoadDamagePerSec">
                             <Label.Template>
                                 <ControlTemplate>
                                     <WrapPanel>

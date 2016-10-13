@@ -30,6 +30,8 @@ namespace ClickerHeroes.View
         private int _mouseAttack = 3;
         private Label _moneyLabel;
         private Label _damagePerClickLabel;
+        private Label _heroSoulLabel;
+        private Label _DamagePerSecLabel;
         private Image _monsterImage;
 
         public MainWindow()
@@ -196,6 +198,20 @@ namespace ClickerHeroes.View
             Label label = sender as Label;
             _moneyLabel = label.Template.FindName("LabelPlayerMoney", label) as Label;
             _moneyLabel.Content = 0;
+        }
+
+        private void LoadHeroSouls(object sender, RoutedEventArgs e)
+        {
+            Label label = sender as Label;
+            _heroSoulLabel = label.Template.FindName("LabelHeroSouls", label) as Label;
+            _heroSoulLabel.Content = 0;
+        }
+
+        private void LoadDamagePerSec(object sender, RoutedEventArgs e)
+        {
+            Label label = sender as Label;
+            _DamagePerSecLabel = label.Template.FindName("LabelDamagePerSec", label) as Label;
+            _DamagePerSecLabel.Content = 0;
         }
     }
 }
