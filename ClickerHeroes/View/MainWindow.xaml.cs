@@ -28,10 +28,9 @@ namespace ClickerHeroes.View
         private ObservableCollection<Place> _placeList;
         private int _currentMonsterId;
         private int _mouseAttack = 3;
-
+        private Label _moneyLabel;
+        private Label _damagePerClickLabel;
         private Image _monsterImage;
-        //private List<Hero> heroList = new List<Hero>();
-        // public List<Hero> HeroList { get; set; }
 
         public MainWindow()
         {
@@ -75,6 +74,7 @@ namespace ClickerHeroes.View
             IEnumerable<Place> places = EntitesList.PlaceList;
             PlaceList = new ObservableCollection<Place>();
 
+            
         }
 
         public void Update(int monsterhealth)
@@ -86,14 +86,22 @@ namespace ClickerHeroes.View
             }
             else
             {
+                //Dodanie zarobionej kasy z przeciwnika
+                var killedMonster = MonsterList.Single(x => x.Id == _currentMonsterId);
+                var currentMoney = int.Parse(_moneyLabel.Content.ToString());
+                currentMoney += killedMonster.Money;
+                _moneyLabel.Content = currentMoney;
+
                 //Załaduj nowego przeciwnika.
                 var monster = MonsterList.Single(x => x.Id == _currentMonsterId+1);
+                _currentMonsterId = monster.Id;
 
                 LabelMonsterName.Content = monster.Name + " Lvl " + monster.Level;
                 LabelHealth.Content = monster.Health;
                 HealthBar.Maximum = monster.Health;
                 HealthBar.Value = monster.Health;
 
+                //TODO: Napraw crasha, który powstaje kiedy monster nie ma imagepath.
                 Uri uri = new Uri(monster.ImagePath, UriKind.Relative);
                 ImageSource imgSource = new BitmapImage(uri);
                 _monsterImage.Source = imgSource;
@@ -174,6 +182,20 @@ namespace ClickerHeroes.View
             var hero = item as Hero;
 
             //TODO: Wprowadź tu kod do kupienia herosa.
+        }
+
+        private void LoadClickDamage(object sender, RoutedEventArgs e)
+        {
+            Label label = sender as Label;
+            _damagePerClickLabel = label.Template.FindName("LabelDamagePerClick", label) as Label;
+            _damagePerClickLabel.Content = 0;
+        }
+
+        private void LoadMoney(object sender, RoutedEventArgs e)
+        {
+            Label label = sender as Label;
+            _moneyLabel = label.Template.FindName("LabelPlayerMoney", label) as Label;
+            _moneyLabel.Content = 0;
         }
     }
 }

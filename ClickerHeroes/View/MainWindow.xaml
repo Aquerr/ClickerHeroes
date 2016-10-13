@@ -91,12 +91,12 @@
 
                     <StackPanel Grid.Column="0">
 
-                        <Label>
+                        <Label Loaded="LoadMoney">
                             <Label.Template>
                                 <ControlTemplate>
                                     <WrapPanel>
-                                        <Image></Image>
-                                        <Label>Hajs</Label>
+                                        <Image Source="../Images/Coin.png" Width="25" Height="25"></Image>
+                                        <Label x:Name="LabelPlayerMoney">Hajs</Label>
                                     </WrapPanel>
                                 </ControlTemplate>
                             </Label.Template>
@@ -107,7 +107,7 @@
                                 <ControlTemplate>
                                     <WrapPanel>
                                         <Image></Image>
-                                        <Label>Hero Souls</Label>
+                                        <Label x:Name="LabelHeroSouls">Hero Souls</Label>
                                     </WrapPanel>
                                 </ControlTemplate>
                             </Label.Template>
@@ -117,12 +117,12 @@
 
                     <StackPanel Grid.Column="1">
 
-                        <Label>
+                        <Label Loaded="LoadClickDamage">
                             <Label.Template>
                                 <ControlTemplate>
                                     <WrapPanel>
                                         <Image></Image>
-                                        <Label>Damage per click</Label>
+                                        <Label x:Name="LabelDamagePerClick">Damage per click</Label>
                                     </WrapPanel>
                                 </ControlTemplate>
                             </Label.Template>
@@ -133,7 +133,7 @@
                                 <ControlTemplate>
                                     <WrapPanel>
                                         <Image></Image>
-                                        <Label>Damage per second</Label>
+                                        <Label x:Name="LabelDamagePerSec">Damage per second</Label>
                                     </WrapPanel>
                                 </ControlTemplate>
                             </Label.Template>
