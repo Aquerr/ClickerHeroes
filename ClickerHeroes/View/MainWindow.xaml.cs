@@ -15,6 +15,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClickerHeroes.Entities;
+using ClickerHeroes.Logic;
+using System.Timers;
+using System.Windows.Threading;
+using Timer = System.Timers.Timer;
 
 namespace ClickerHeroes.View
 {
@@ -27,12 +31,16 @@ namespace ClickerHeroes.View
         private ObservableCollection<Monster> _monsterList;
         private ObservableCollection<Place> _placeList;
         private int _currentMonsterId;
-        private int _mouseAttack = 3;
+        private double _mouseAttack = 3;
         private Label _moneyLabel;
         private Label _damagePerClickLabel;
         private Label _heroSoulLabel;
         private Label _DamagePerSecLabel;
         private Image _monsterImage;
+        private AutoDamager _autoDamager;
+
+        private DispatcherTimer _timer;
+       // private int Interval { get { return 1000; } }
 
         public MainWindow()
         {
@@ -41,6 +49,13 @@ namespace ClickerHeroes.View
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            _autoDamager = new AutoDamager();
+            _timer = new DispatcherTimer()
+            {
+                Interval = new TimeSpan(0,0,1),
+            };
+            _timer.Tick += new EventHandler(dispatcherTimer_Tick);
+
             //Ładowanie listy herosów
             IEnumerable<Hero> heroes = EntitesList.HeroList;
             List<Hero> startHeroes = new List<Hero>();
@@ -79,7 +94,14 @@ namespace ClickerHeroes.View
             
         }
 
-        public void Update(int monsterhealth)
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            double hp = double.Parse(LabelHealth.Content.ToString());
+            var monsterhelath = _autoDamager.Attack(hp);
+            Update(monsterhelath);
+        }
+
+        public void Update(double monsterhealth)
         {
             if (monsterhealth > 0)
             {
@@ -88,6 +110,9 @@ namespace ClickerHeroes.View
             }
             else
             {
+               // _autoDamager.Wait();
+                _timer.Stop();
+
                 //Dodanie zarobionej kasy z przeciwnika
                 var killedMonster = MonsterList.Single(x => x.Id == _currentMonsterId);
                 var currentMoney = int.Parse(_moneyLabel.Content.ToString());
@@ -107,12 +132,15 @@ namespace ClickerHeroes.View
                 Uri uri = new Uri(monster.ImagePath, UriKind.Relative);
                 ImageSource imgSource = new BitmapImage(uri);
                 _monsterImage.Source = imgSource;
+
+                //_autoDamager.Start(monster.Health);
+                _timer.Start();
             }
         }
 
         public void MouseAttack()
         {
-            int monsterhealth = int.Parse(LabelHealth.Content.ToString());
+            double monsterhealth = int.Parse(LabelHealth.Content.ToString());
             monsterhealth -= _mouseAttack;
             Update(monsterhealth);
         }
@@ -180,8 +208,21 @@ namespace ClickerHeroes.View
 
         private void BuyHero(object sender, RoutedEventArgs e)
         {
+            if (!_timer.IsEnabled) _timer.Start();
+
             var item = (sender as FrameworkElement).DataContext;
             var hero = item as Hero;
+            var heroIndex = _heroList.IndexOf(hero);
+
+            _mouseAttack += hero.Damage/4;
+
+            _autoDamager.AddDamage(hero.Damage);
+
+            hero.Level += 1;
+            hero.Damage *= 1.5;
+
+            _heroList.RemoveAt(heroIndex);
+            _heroList.Add(hero);
 
             //TODO: Wprowadź tu kod do kupienia herosa.
         }
@@ -212,6 +253,15 @@ namespace ClickerHeroes.View
             Label label = sender as Label;
             _DamagePerSecLabel = label.Template.FindName("LabelDamagePerSec", label) as Label;
             _DamagePerSecLabel.Content = 0;
+        }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            //TODO: Dodaj kod, który będzie zadawał obrażenia przeciwnikowi.
+
+            double hp = MonsterList.Single(x=>x.Id == _currentMonsterId).Health;
+            var monsterhelath = _autoDamager.Attack(hp);
+            Update(monsterhelath);
         }
     }
 }
