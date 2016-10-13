@@ -44,12 +44,12 @@ namespace ClickerHeroes.Entities
         {
             new Monster() { Id = 1,Level = 1, Health = 100, Money = 10, Name = "Zombie", ImagePath = "../../Images/zombie.png"},
             new Monster() { Id = 2,Level = 2, Health = 120, Money = 20, Name = "Skorpion", ImagePath = "../../Images/scorpion.jpg"},
-            new Monster() { Id = 3,Level = 3, Health = 140, Money = 30, Name = "Cyklop" },
-            new Monster() { Id = 4,Level = 4, Health = 150, Money = 40, Name = "Mutant" },
-            new Monster() { Id = 5,Level = 5, Health = 160, Money = 50, Name = "Pająk" },
-            new Monster() { Id = 6,Level = 6, Health = 180, Money = 60, Name = "Bandyta" },
-            new Monster() { Id = 7,Level = 7, Health = 200, Money = 70, Name = "Kamień" },
-            new Monster() { Id = 8,Level = 8, Health = 220, Money = 80, Name = "Zombie" }
+            new Monster() { Id = 3,Level = 3, Health = 140, Money = 30, Name = "Cyklop" , ImagePath = "../../Images/no_image.jpg"},
+            new Monster() { Id = 4,Level = 4, Health = 150, Money = 40, Name = "Mutant" , ImagePath = "../../Images/no_image.jpg"},
+            new Monster() { Id = 5,Level = 5, Health = 160, Money = 50, Name = "Pająk"  , ImagePath = "../../Images/no_image.jpg"},
+            new Monster() { Id = 6,Level = 6, Health = 180, Money = 60, Name = "Bandyta", ImagePath = "../../Images/no_image.jpg"},
+            new Monster() { Id = 7,Level = 7, Health = 200, Money = 70, Name = "Kamień" , ImagePath = "../../Images/no_image.jpg"},
+            new Monster() { Id = 8,Level = 8, Health = 220, Money = 80, Name = "Zombie" , ImagePath = "../../Images/no_image.jpg"}
         };
     }
 }

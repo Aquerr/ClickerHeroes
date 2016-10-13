@@ -110,6 +110,7 @@
   <ItemGroup>
     <Resource Include="Images\scorpion.jpg" />
     <Resource Include="Images\Coin.png" />
+    <Resource Include="Images\no_image.jpg" />
     <Content Include="Sounds\Hit.wav" />
     <Content Include="Sounds\Punch.wav" />
   </ItemGroup>
