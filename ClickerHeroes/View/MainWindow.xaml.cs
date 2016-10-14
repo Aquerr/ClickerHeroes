@@ -52,7 +52,7 @@ namespace ClickerHeroes.View
             _autoDamager = new AutoDamager();
             _timer = new DispatcherTimer()
             {
-                Interval = new TimeSpan(0,0,1),
+                Interval = new TimeSpan(0,0,0,0,1),
             };
             _timer.Tick += new EventHandler(dispatcherTimer_Tick);
 
@@ -209,6 +209,8 @@ namespace ClickerHeroes.View
         private void BuyHero(object sender, RoutedEventArgs e)
         {
             if (!_timer.IsEnabled) _timer.Start();
+            
+            //TODO: Kupienie herosa przesówa go na koniec listy. Trzeba to naprawić.
 
             var item = (sender as FrameworkElement).DataContext;
             var hero = item as Hero;

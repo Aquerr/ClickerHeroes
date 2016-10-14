@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
 
@@ -13,7 +14,7 @@ namespace ClickerHeroes.Logic
         private double _totalDamage;
         //private readonly Timer _timer;
         //private int Interval { get { return 1000; } }
-        //private float DamageMultiplier;
+        private const float DamageMultiplier = 0.2f;
 
         public AutoDamager()
         {
@@ -47,7 +48,7 @@ namespace ClickerHeroes.Logic
 
             double currentHealth = health;
 
-            currentHealth -= _totalDamage;
+            currentHealth -= _totalDamage * DamageMultiplier;
 
             return currentHealth;
         }
