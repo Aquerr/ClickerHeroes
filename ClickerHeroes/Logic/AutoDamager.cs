@@ -11,10 +11,10 @@ namespace ClickerHeroes.Logic
 {
     public class AutoDamager
     {
-        private double _totalDamage;
+        private float _totalDamage;
         //private readonly Timer _timer;
         //private int Interval { get { return 1000; } }
-        private const float DamageMultiplier = 0.2f;
+        private const float _damageMultiplier = 0.2f;
 
         public AutoDamager()
         {
@@ -32,7 +32,7 @@ namespace ClickerHeroes.Logic
 
         //Dodawanie obrażeń do AutoDamagera.
         //Jeśli nowy heros zostanie kupiony, jego obrażenia dodadzą się do AutoDamagera za pomocą tej funkcji.
-        public void AddDamage(double damage)
+        public void AddDamage(float damage)
         {
             _totalDamage += damage;
         }
@@ -48,7 +48,7 @@ namespace ClickerHeroes.Logic
 
             double currentHealth = health;
 
-            currentHealth -= _totalDamage * DamageMultiplier;
+            currentHealth -= _totalDamage * _damageMultiplier;
 
             return currentHealth;
         }

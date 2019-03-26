@@ -27,9 +27,9 @@ namespace ClickerHeroes.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Hero> _heroList;
-        private ObservableCollection<Monster> _monsterList;
-        private ObservableCollection<Place> _placeList;
+        private static ObservableCollection<Hero> _heroList;
+        private static ObservableCollection<Monster> _monsterList;
+        private static ObservableCollection<Place> _placeList;
         private int _currentMonsterId;
         private double _mouseAttack = 3;
         private Label _moneyLabel;
@@ -119,6 +119,10 @@ namespace ClickerHeroes.View
                 currentMoney += killedMonster.Money;
                 _moneyLabel.Content = currentMoney;
 
+                //Remove monster from the list
+                MonsterList.RemoveAt(0);
+                MonsterGenerator.GenerateNewMonster();
+
                 //Załaduj nowego przeciwnika.
                 var monster = MonsterList.Single(x => x.Id == _currentMonsterId+1);
                 _currentMonsterId = monster.Id;
@@ -160,7 +164,7 @@ namespace ClickerHeroes.View
             Application.Current.Shutdown();
         }
 
-        public ObservableCollection<Hero> HeroList
+        public static ObservableCollection<Hero> HeroList
         {
             get { return _heroList; }
             set
@@ -172,7 +176,7 @@ namespace ClickerHeroes.View
             }
         }
 
-        public ObservableCollection<Monster> MonsterList
+        public static ObservableCollection<Monster> MonsterList
         {
             get { return _monsterList; }
             set
@@ -184,7 +188,7 @@ namespace ClickerHeroes.View
             }
         }
 
-        public ObservableCollection<Place> PlaceList
+        public static ObservableCollection<Place> PlaceList
         {
             get { return _placeList; }
             set
@@ -221,7 +225,7 @@ namespace ClickerHeroes.View
             _autoDamager.AddDamage(hero.Damage);
 
             hero.Level += 1;
-            hero.Damage *= 1.5;
+            hero.Damage *= 1.5f;
 
             _heroList.RemoveAt(heroIndex);
             _heroList.Add(hero);

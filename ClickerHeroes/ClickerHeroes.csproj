@@ -66,8 +66,10 @@
     <Compile Include="Entities\Hero.cs" />
     <Compile Include="Entities\EntitiesList.cs" />
     <Compile Include="Entities\Monster.cs" />
+    <Compile Include="Entities\MonsterNameImagePathPair.cs" />
     <Compile Include="Entities\Place.cs" />
     <Compile Include="Logic\AutoDamager.cs" />
+    <Compile Include="Logic\MonsterGenerator.cs" />
     <Compile Include="Logic\MouseLogic.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
