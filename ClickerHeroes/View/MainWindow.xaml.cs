@@ -144,7 +144,7 @@ namespace ClickerHeroes.View
 
         public void MouseAttack()
         {
-            double monsterhealth = int.Parse(LabelHealth.Content.ToString());
+            double monsterhealth = double.Parse(LabelHealth.Content.ToString());
             monsterhealth -= _mouseAttack;
             Update(monsterhealth);
         }
