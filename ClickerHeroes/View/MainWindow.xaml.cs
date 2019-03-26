@@ -19,6 +19,8 @@ using ClickerHeroes.Logic;
 using System.Timers;
 using System.Windows.Threading;
 using Timer = System.Timers.Timer;
+using System.Threading;
+using System.Globalization;
 
 namespace ClickerHeroes.View
 {
@@ -45,6 +47,7 @@ namespace ClickerHeroes.View
         public MainWindow()
         {
             InitializeComponent();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
