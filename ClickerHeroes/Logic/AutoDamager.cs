@@ -34,7 +34,7 @@ namespace ClickerHeroes.Logic
         //Jeśli nowy heros zostanie kupiony, jego obrażenia dodadzą się do AutoDamagera za pomocą tej funkcji.
         public void AddDamage(float damage)
         {
-            _totalDamage += damage;
+            _totalDamage = (float)Math.Round(_totalDamage + damage, 2);
         }
 
         public void ReturnHealth()
@@ -42,13 +42,13 @@ namespace ClickerHeroes.Logic
 
         }
 
-        public double Attack(double health)
+        public float Attack(float health)
         {
             //TODO: Funkcja powinna odbierać życie potworowi i zwracać nową wartość.
 
-            double currentHealth = health;
+            float currentHealth = health;
 
-            currentHealth -= _totalDamage * _damageMultiplier;
+            currentHealth -= (float)Math.Round(_totalDamage * _damageMultiplier, 2);
 
             return currentHealth;
         }

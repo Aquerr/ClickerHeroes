@@ -30,7 +30,7 @@ namespace ClickerHeroes.Logic
             MonsterNameImagePathPair randomMonsterNameImagePathPair = GetRandomMonster();
 
             newMonster.Id = monster.Id + 1;
-            newMonster.Health = monster.Health + 20;
+            newMonster.Health = monster.Health + 200;
             newMonster.Level = monster.Level + 1;
             newMonster.Name = randomMonsterNameImagePathPair.Name;
             newMonster.ImagePath = randomMonsterNameImagePathPair.ImagePath;

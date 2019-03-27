@@ -33,7 +33,7 @@ namespace ClickerHeroes.View
         private static ObservableCollection<Monster> _monsterList;
         private static ObservableCollection<Place> _placeList;
         private int _currentMonsterId;
-        private double _mouseAttack = 3;
+        private float _mouseAttack = 3f;
         private Label _moneyLabel;
         private Label _damagePerClickLabel;
         private Label _heroSoulLabel;
@@ -99,12 +99,12 @@ namespace ClickerHeroes.View
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            double hp = double.Parse(LabelHealth.Content.ToString());
-            var monsterhelath = _autoDamager.Attack(hp);
+            float hp = float.Parse(LabelHealth.Content.ToString());
+            var monsterhelath = (float)Math.Round(_autoDamager.Attack(hp), 2);
             Update(monsterhelath);
         }
 
-        public void Update(double monsterhealth)
+        public void Update(float monsterhealth)
         {
             if (monsterhealth > 0)
             {
@@ -147,7 +147,7 @@ namespace ClickerHeroes.View
 
         public void MouseAttack()
         {
-            double monsterhealth = double.Parse(LabelHealth.Content.ToString());
+            float monsterhealth = float.Parse(LabelHealth.Content.ToString());
             monsterhealth -= _mouseAttack;
             Update(monsterhealth);
         }
@@ -216,24 +216,29 @@ namespace ClickerHeroes.View
         private void BuyHero(object sender, RoutedEventArgs e)
         {
             if (!_timer.IsEnabled) _timer.Start();
-            
-            //TODO: Kupienie herosa przesówa go na koniec listy. Trzeba to naprawić.
 
             var item = (sender as FrameworkElement).DataContext;
             var hero = item as Hero;
-            var heroIndex = _heroList.IndexOf(hero);
 
-            _mouseAttack += hero.Damage/4;
+            int currentMoney = int.Parse(_moneyLabel.Content.ToString());
+            if (currentMoney >= hero.Price)
+            {
+                _moneyLabel.Content = currentMoney - hero.Price;
+                var heroIndex = _heroList.IndexOf(hero);
 
-            _autoDamager.AddDamage(hero.Damage);
+                _mouseAttack += (float)Math.Round(hero.Damage / 4, 2);
 
-            hero.Level += 1;
-            hero.Damage *= 1.5f;
+                _autoDamager.AddDamage(hero.Damage);
 
-            _heroList.RemoveAt(heroIndex);
-            _heroList.Add(hero);
+                //TODO: Heroes are not updated in the view.
 
-            //TODO: Wprowadź tu kod do kupienia herosa.
+                hero.Level += 1;
+                hero.Damage *= 1.5f;
+                hero.Price *= 2;
+
+                //_heroList.RemoveAt(heroIndex);
+                //_heroList.Add(hero);
+            }
         }
 
         private void LoadClickDamage(object sender, RoutedEventArgs e)
@@ -266,9 +271,9 @@ namespace ClickerHeroes.View
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //TODO: Dodaj kod, który będzie zadawał obrażenia przeciwnikowi.
+            //TODO: Obecnie atakowany potwór nie powinien znajdować się w liście.
 
-            double hp = MonsterList.Single(x=>x.Id == _currentMonsterId).Health;
+            float hp = MonsterList.Single(x=>x.Id == _currentMonsterId).Health;
             var monsterhelath = _autoDamager.Attack(hp);
             Update(monsterhelath);
         }

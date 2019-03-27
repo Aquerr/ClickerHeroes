@@ -13,8 +13,8 @@ namespace ClickerHeroes.Entities
         //Lista herosów póki co musi pozostać bez zmian.
         public static List<Hero> HeroList = new List<Hero>()
         {
-            new Hero() { Id = 1,Bought = false, Name = "Patryk", Damage = 5, Level = 0, Price = 100 },
-            new Hero() { Id = 2,Bought = false, Name = "Michał", Damage = 10, Level = 0, Price = 100 },
+            new Hero() { Id = 1,Bought = false, Name = "Patryk", Damage = 5.5f, Level = 0, Price = 10 },
+            new Hero() { Id = 2,Bought = false, Name = "Michał", Damage = 10, Level = 0, Price = 50 },
             new Hero() { Id = 3,Bought = false, Name = "Rafał", Damage = 15, Level = 0, Price = 100 },
             new Hero() { Id = 4,Bought = false, Name = "Bartek", Damage = 20, Level = 0, Price = 100 },
             new Hero() { Id = 5,Bought = false, Name = "Maciek", Damage = 25, Level = 0, Price = 100 },
