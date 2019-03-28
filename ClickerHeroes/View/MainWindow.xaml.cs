@@ -33,7 +33,7 @@ namespace ClickerHeroes.View
         private static ObservableCollection<Monster> _monsterList;
         private static ObservableCollection<Place> _placeList;
         private int _currentMonsterId;
-        private float _mouseAttack = 3f;
+        private float _mouseAttack = 1f;
         private Label _moneyLabel;
         private Label _damagePerClickLabel;
         private Label _heroSoulLabel;
@@ -204,7 +204,7 @@ namespace ClickerHeroes.View
         }
 
         private void MonsterLoaded(object sender, RoutedEventArgs e)
-        {
+        {                
             //Ładowanie pierwszego potwora.
             Button button = sender as Button;
             _monsterImage = button.Template.FindName("ImageEnemy", button) as Image;
